@@ -1,16 +1,22 @@
 {
   "tasks": [
     {
-      "text": "1312",
-      "day": "",
-      "reminder": false,
-      "id": 4
+      "text": "Gramarly + FAQ text edit",
+      "day": "Challenge",
+      "reminder": true,
+      "id": 1
     },
     {
-      "text": "123123",
-      "day": "2021-04-15",
-      "reminder": true,
-      "id": 5
+      "text": "Meeting with Pasha about the test cases 18:30",
+      "day": "Internal activities ",
+      "reminder": false,
+      "id": 2
+    },
+    {
+      "text": "Find a critical tasks in the backlog that should be implemented before the release",
+      "day": "Challenge",
+      "reminder": false,
+      "id": 3
     }
   ]
 }

@@ -23,16 +23,16 @@ const AddTask = ({ onAdd }) => {
       <form className='add-form' onSubmit={onSubmit}>
          <div className='form-control'>
             <label>Task</label>
-            <input type='text' placeholder='Task name'
+            <input type='text' placeholder='Task description'
                value={text} onChange={(e) => setText(e.target.value)} />
          </div>
          <div className='form-control'>
-            <label>Day & time</label>
-            <input type='date' placeholder='The task Date'
+            <label>Project name</label>
+            <input type='text' placeholder='Project'
                value={day} onChange={(e) => setDay(e.target.value)} />
          </div>
          <div className='form-control form-control-check'>
-            <label>Set Reminder</label>
+            <label>Mark as done</label>
             <input type='checkbox'
                checked={reminder}
                name='reminder'
