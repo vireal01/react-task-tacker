@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const AddTask = ({ onAdd }) => {
    const [text, setText] = useState('')
-   const [day, setDay] = useState('')
+   const [day, setProject] = useState('')
    const [reminder, setReminder] = useState(false)
    const onSubmit = (e) => {
       e.preventDefault()
@@ -15,7 +15,7 @@ const AddTask = ({ onAdd }) => {
 
       onAdd({ text, day, reminder })
       setText('')
-      setDay('')
+      setProject('')
       setReminder(false)
    }
 
@@ -28,9 +28,16 @@ const AddTask = ({ onAdd }) => {
          </div>
          <div className='form-control'>
             <label>Project name</label>
-            <input type='text' placeholder='Project'
-               value={day} onChange={(e) => setDay(e.target.value)} />
+            <input list='project-picker' autocomplete="off" onChange={(e) => setProject(e.target.value)} />
+            <datalist name="project-picker-element" id="project-picker" >
+               <option value="Challenge" />
+               <option value="Internal Activities" />
+               <option value="Expert Tutor" />
+            </datalist>
          </div>
+
+
+
          <div className='form-control form-control-check'>
             <label>Mark as done</label>
             <input type='checkbox'
