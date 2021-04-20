@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import About from './components/About'
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+// import Button from './components/Button'
 
 
 
@@ -41,6 +42,15 @@ function App() {
   }
 
 
+  // let checkboxState = true
+  const TaskFilter = props => {
+    return (
+      <div>
+        <input type="checkbox" id="checkboxHideClosed" checked={props.checked} onChange={(e) => props.setChecked(e.target.checked)} />
+        <label for="hide-closed">Hide closed</label>
+      </div>
+    )
+  }
 
   // Add a task
   const addTask = async (task) => {
@@ -93,20 +103,25 @@ function App() {
           data.reminder
       } : task))
   }
-
-
+  const [checked, setChecked] = useState(false)
+  console.log(checked)
   return (
     <Router>
       <div className='container'>
         <Header onAdd={() => setShowAddTask(!showAddTask)}
           showAdd={showAddTask} />
+        <TaskFilter checked={checked} setChecked={setChecked} />
         <Route path='/' exact render={(props) => (
           <>
             {showAddTask && <AddTask onAdd={addTask} />}
             {tasks.length > 0 ? <Tasks tasks={tasks}
+              hideDone={checked}
               onDelete={deleteTask} onToggle={setReminder} /> :
-              'No tasks to show'} </>
+              'No tasks to show'}
+          </>
+
         )} />
+
         <Route path='/about' component={About} />
         <Footer />
       </div>

@@ -28,7 +28,7 @@ const AddTask = ({ onAdd }) => {
          </div>
          <div className='form-control'>
             <label>Project name</label>
-            <input list='project-picker' autocomplete="off" onChange={(e) => setProject(e.target.value)} />
+            <input list='project-picker' autocomplete="off" onChange={(e) => setProject(e.target.value)} placeholder='Project' />
             <datalist name="project-picker-element" id="project-picker" >
                <option value="Challenge" />
                <option value="Internal Activities" />
