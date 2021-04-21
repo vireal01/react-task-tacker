@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 // import Button from './components/Button'
 
-const apiUrl = 'https://vireal.defernus.com'
+const apiUrl = process.env.REACT_APP_API_URL
 
 
 function App() {
