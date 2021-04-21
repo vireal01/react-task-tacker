@@ -10,7 +10,7 @@ services:
       ports:
          - 1488:3000
       environment: 
-         - REACT_APP_API_URL=https://vireal.defernus.com/
+         - REACT_APP_API_URL=https://vireal.defernus.com
       volumes: 
          - ./frontend:/app
 
