@@ -17,6 +17,30 @@
       "day": "Challenge",
       "reminder": false,
       "id": 3
+    },
+    {
+      "text": "Read the user stories",
+      "day": "Expert Tutor",
+      "reminder": false,
+      "id": 4
+    },
+    {
+      "text": "Exchange points for purchases ",
+      "day": "Challenge",
+      "reminder": true,
+      "id": 5
+    },
+    {
+      "text": "Bug with the video uploading from gallery ",
+      "day": "Challenge",
+      "reminder": false,
+      "id": 6
+    },
+    {
+      "text": "2nd priority stories",
+      "day": "Challenge",
+      "reminder": false,
+      "id": 9
     }
   ]
 }

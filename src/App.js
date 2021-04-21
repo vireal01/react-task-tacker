@@ -45,9 +45,9 @@ function App() {
   // let checkboxState = true
   const TaskFilter = props => {
     return (
-      <div>
+      <div className='checkbox'>
         <input type="checkbox" id="checkboxHideClosed" checked={props.checked} onChange={(e) => props.setChecked(e.target.checked)} />
-        <label for="hide-closed">Hide closed</label>
+        <label for="hide-closed" id='checkboxLabel'>Hide closed</label>
       </div>
     )
   }
