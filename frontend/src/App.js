@@ -8,13 +8,16 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 // import Button from './components/Button'
 
+import fetchTasks from './methods/fetchTasks'
+import fetchTask from './methods/fetchTask'
+import addTask from './methods/addTask'
+
 const apiUrl = process.env.REACT_APP_API_URL
 
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false)
-  const [tasks, setTasks] = useState([]
-  )
+  const [tasks, setTasks] = useState([])
 
   useEffect(() => {
     const getTasks = async () => {
@@ -24,50 +27,33 @@ function App() {
     getTasks()
   }, [])
 
-  //Fetch Tasks
-  const fetchTasks = async () => {
-    const res = await fetch(`${apiUrl}/tasks`)
-    const data = await res.json()
-    console.log(data);
-    return data
-  }
-
-
-  //Fetch Task
-  const fetchTask = async (id) => {
-    const res = await fetch(`${apiUrl}/tasks/${id}`)
-    const data = await res.json()
-    console.log(data);
-    return data
-  }
-
 
   // let checkboxState = true
   const TaskFilter = props => {
     return (
       <div className='checkbox'>
         <input type="checkbox" id="checkboxHideClosed" checked={props.checked} onChange={(e) => props.setChecked(e.target.checked)} />
-        <label for="hide-closed" id='checkboxLabel'>Hide closed</label>
+        <label htmlFor="hide-closed" id='checkboxLabel'>Hide closed</label>
       </div>
     )
   }
 
   // Add a task
-  const addTask = async (task) => {
-    const res = await fetch(`${apiUrl}/tasks`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(task)
-    })
+  // const addTask = async (task) => {
+  //   const res = await fetch(`${apiUrl}/tasks`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify(task)
+  //   })
 
-    const data = await res.json()
-    // const id = Math.floor(Math.random() * 10000) + 1
-    // const newTask = { id, ...task }
-    // setTasks([...tasks, newTask])
-    setTasks([...tasks, data])
-  }
+  //   const data = await res.json()
+  //   // const id = Math.floor(Math.random() * 10000) + 1
+  //   // const newTask = { id, ...task }
+  //   // setTasks([...tasks, newTask])
+  //   setTasks([...tasks, data])
+  // }
 
   // Delete Task
   const deleteTask = async (id) => {
@@ -104,16 +90,22 @@ function App() {
       } : task))
   }
   const [checked, setChecked] = useState(false)
-  console.log(checked)
   return (
     <Router>
       <div className='container'>
         <Header onAdd={() => setShowAddTask(!showAddTask)}
           showAdd={showAddTask} />
-        <TaskFilter checked={checked} setChecked={setChecked} />
+
         <Route path='/' exact render={(props) => (
           <>
-            {showAddTask && <AddTask onAdd={addTask} />}
+            <TaskFilter checked={checked} setChecked={setChecked} />
+            {showAddTask &&
+              <AddTask onAdd={(newTask) => addTask({
+                newTask: newTask,
+                setTasks: setTasks,
+                oldTasks: tasks
+              })} />
+            }
             {tasks.length > 0 ? <Tasks tasks={tasks}
               hideDone={checked}
               onDelete={deleteTask} onToggle={setReminder} /> :
