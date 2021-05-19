@@ -21,8 +21,8 @@ function App() {
 
   useEffect(() => {
     const getTasks = async () => {
-      const tasksFromServet = await fetchTasks()
-      setTasks(tasksFromServet)
+      const tasksFromServer = await fetchTasks()
+      setTasks(tasksFromServer)
     }
     getTasks()
   }, [])
@@ -32,7 +32,9 @@ function App() {
   const TaskFilter = props => {
     return (
       <div className='checkbox'>
-        <input type="checkbox" id="checkboxHideClosed" checked={props.checked} onChange={(e) => props.setChecked(e.target.checked)} />
+        <input type="checkbox" id="checkboxHideClosed"
+          checked={props.checked}
+          onChange={(e) => props.setChecked(e.target.checked)} />
         <label htmlFor="hide-closed" id='checkboxLabel'>Hide closed</label>
       </div>
     )
@@ -45,7 +47,7 @@ function App() {
         <Header onAdd={() => setShowAddTask(!showAddTask)}
           showAdd={showAddTask} />
 
-        <Route path='/' exact render={(props) => (
+        <Route path='/' exact render={() => (
           <>
             <TaskFilter checked={checked} setChecked={setChecked} />
             {showAddTask &&
