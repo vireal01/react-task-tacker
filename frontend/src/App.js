@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import fetchTasks from './methods/fetchTasks'
 import fetchTask from './methods/fetchTask'
 import addTask from './methods/addTask'
+import deleteTask from './methods/deleteTask'
 
 const apiUrl = process.env.REACT_APP_API_URL
 
@@ -36,33 +37,6 @@ function App() {
         <label htmlFor="hide-closed" id='checkboxLabel'>Hide closed</label>
       </div>
     )
-  }
-
-  // Add a task
-  // const addTask = async (task) => {
-  //   const res = await fetch(`${apiUrl}/tasks`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //     },
-  //     body: JSON.stringify(task)
-  //   })
-
-  //   const data = await res.json()
-  //   // const id = Math.floor(Math.random() * 10000) + 1
-  //   // const newTask = { id, ...task }
-  //   // setTasks([...tasks, newTask])
-  //   setTasks([...tasks, data])
-  // }
-
-  // Delete Task
-  const deleteTask = async (id) => {
-    await fetch(`${apiUrl}/tasks/${id}`, {
-      method: 'DELETE'
-    })
-
-    console.log(`${id} task was deleted`);
-    setTasks(tasks.filter((task) => task.id !== id))
   }
 
   //Set reminder
@@ -108,7 +82,11 @@ function App() {
             }
             {tasks.length > 0 ? <Tasks tasks={tasks}
               hideDone={checked}
-              onDelete={deleteTask} onToggle={setReminder} /> :
+              onDelete={(id) => deleteTask({
+                id,
+                setTasks,
+                oldTasks: tasks
+              })} onToggle={setReminder} /> :
               'No tasks to show'}
           </>
 
