@@ -6,14 +6,13 @@ import Footer from './components/Footer'
 import About from './components/About'
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-// import Button from './components/Button'
-
 import fetchTasks from './methods/fetchTasks'
-import fetchTask from './methods/fetchTask'
 import addTask from './methods/addTask'
 import deleteTask from './methods/deleteTask'
+import setAsDone from './methods/setAsDone'
 
-const apiUrl = process.env.REACT_APP_API_URL
+
+// const apiUrl = process.env.REACT_APP_API_URL
 
 
 function App() {
@@ -39,30 +38,6 @@ function App() {
     )
   }
 
-  //Set reminder
-
-  const setReminder = async (id) => {
-    const taskToRemind = await fetchTask(id)
-    const updateTask = {
-      ...taskToRemind,
-      reminder: !taskToRemind.reminder
-    }
-
-    const res = await fetch(`${apiUrl}/tasks/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(updateTask)
-    })
-    const data = await res.json()
-
-    setTasks(
-      tasks.map((task) => task.id === id ? {
-        ...task, reminder:
-          data.reminder
-      } : task))
-  }
   const [checked, setChecked] = useState(false)
   return (
     <Router>
@@ -86,7 +61,11 @@ function App() {
                 id,
                 setTasks,
                 oldTasks: tasks
-              })} onToggle={setReminder} /> :
+              })} onToggle={(id) => setAsDone({
+                id,
+                setTasks,
+                oldTasks: tasks
+              })} /> :
               'No tasks to show'}
           </>
 
